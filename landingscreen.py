@@ -19,16 +19,18 @@ class Test(BoxLayout):
 		self.orientation = 'vertical'
 		self.img1 = Image(pos_hint={"top": 1}, size_hint=(1, 0.9))
 		self.add_widget(self.img1)
-		self.output = Label(text="test", pos_hint={'bottom': 1}, size_hint=(1, 0.1))
+		self.output = Label(text="Translation comes here", pos_hint={'bottom': 1}, size_hint=(1, 0.1))
 		self.add_widget(self.output)
 
 		# Inside
 		self.inside = FloatLayout(size_hint=(1, 0.1))
 		self.inside.cols = 2
 		self.capture = cv2.VideoCapture(0)
-		self.play = Button(text="Play", size_hint=(0.5, 1), pos_hint={"left": 1})
-		self.translate = Button(text="Translate", size_hint=(0.5, 1), pos_hint={"right": 1})
-		self.inside.add_widget(self.play)
+		#self.play = Button(text="Play", size_hint=(0.5, 1), pos_hint={"left": 1})
+		#self.play.bind(on_press=self.pressed)
+		self.translate = Button(text="Translate", size_hint=(1, 1))
+		self.translate.bind(on_press=self.pressed)
+		#self.inside.add_widget(self.play)
 		self.inside.add_widget(self.translate)
 		self.add_widget(self.inside)
 		#cv2.namedWindow("CV2 Image")
@@ -42,6 +44,9 @@ class Test(BoxLayout):
 		texture1 = Texture.create(size = (frame.shape[1], frame.shape[0]), colorfmt='bgr')
 		texture1.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
 		self.img1.texture = texture1
+
+	def pressed(self, instance):
+		print("Pressed")
 
 
 class CamApp(App):
