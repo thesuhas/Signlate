@@ -1,0 +1,43 @@
+# <Controller>:
+
+# 	BoxLayout:
+# 		cols: 1
+# 		orientation: 'vertical'
+# 		padding: 25
+# 		size: root.width - 200, root.height -200
+
+# 		# Camera:
+# 		# 	size: root.width, root.height	
+			
+# 		BoxLayout:
+			
+# 			cols:2
+# 			Button:
+# 				text: "Generate sign lang"
+# 				on_press: root.generate()
+				
+# 			Button:
+# 				text: "Generate sign lang"
+# 				on_press: root.generate()
+
+<CameraClick>:
+	orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (640, 480)
+        play: True
+    # ToggleButton:
+    #     text: 'Play'
+    #     on_press: camera.play = not camera.play
+    #     size_hint_y: None
+    #     height: '48dp'
+
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        height: '48dp'
+        on_press: root.capture()
+
+	
+				
+	
