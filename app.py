@@ -4,7 +4,7 @@ from PIL import Image
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def nothing():
     return jsonify({"message": "This app translates sign language"})
 

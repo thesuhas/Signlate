@@ -12,6 +12,7 @@ from kivy.network.urlrequest import UrlRequest
 from kivy.graphics.texture import Texture
 from kivy.uix.image import Image
 import time
+import base64
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -42,15 +43,19 @@ class Test(BoxLayout):
 		ret, frame = self.capture.read()
 		buf1 = cv2.flip(frame, 0)
 		buf = buf1.tostring()
+		self.img = frame
 		texture1 = Texture.create(size = (frame.shape[1], frame.shape[0]), colorfmt='bgr')
 		texture1.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
 		self.img1.texture = texture1
 
 	def pressed(self, instance):
 		# URL to send request to
-		url = "https://signlate.herokuapp.com/"
+		url = "http://127.0.0.1:5000/upload"
+		headers = {'Content-Type': "multipart/form-data"}
 		# Request being sent
-		req = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail)
+		#print(self.img)
+		res = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail, method='POST', req_body=self.img.tostring(), req_headers=headers)
+		#print(res)
 
 	# Function that is called on success
 	def print_res(self, req, res):
@@ -58,7 +63,7 @@ class Test(BoxLayout):
 
 	# Function that is called on failure
 	def print_fail(self, req, res):
-		print("Request Failed")
+		print("Request Failed", req, res)
 
 
 class CamApp(App):
