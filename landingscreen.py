@@ -13,30 +13,39 @@ from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 
+class Test(BoxLayout):
+	def __init__(self, **kwargs):
+		super(Test, self).__init__(**kwargs)
+		self.cols = 1
+		self.img1 = Image()
 
-class Signlate(App):
+		# Inside
+		self.inside = BoxLayout()
+		self.inside.cols = 1
+		self.capture = cv2.VideoCapture(0)
+		self.play = Button(text="Play")
+		self.inside.add_widget(self.play)
+		self.add_widget(self.inside)
+		#cv2.namedWindow("CV2 Image")
+		Clock.schedule_interval(self.update, 1.0/33.0)
+
+		self.add_widget(self.img1)
+
+	def update(self, dt):
+		ret, frame = self.capture.read()
+		#cv2.imshow("CV2 Image", frame)
+		buf1 = cv2.flip(frame, 0)
+		buf = buf1.tostring()
+		texture1 = Texture.create(size = (frame.shape[1], frame.shape[0]), colorfmt='bgr')
+		texture1.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
+		self.img1.texture = texture1
+
+
+class CamApp(App):
+
 	def build(self):
-		return CameraClick() #need to find a better way to do this
+		return Test()
 
-class CameraClick(FloatLayout):
-	def capture(self):
-		camera = self.ids['camera']
-		timestr = time.strftime("%Y%m%d_%H%M%S")
-		camera.export_to_png("cam_{}.png".format(timestr))
-		print("Capturedddddd")
-
-# class Controller(FloatLayout):
-# 	def __init__(self, **kwargs):
-# 		super(Controller, self).__init__(**kwargs)
-# 		self.camera = Camera()
-# 		self.add_widget(self.camera, )
-
-# 	def generate(self):
-# 		print("HELLO")
-
-
-		
-		
-		
-if __name__ == "__main__":
-	Signlate().run()
+if __name__ == '__main__':
+    CamApp().run()
+    cv2.destroyAllWindows()
