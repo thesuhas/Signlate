@@ -9,3 +9,7 @@ def nothing():
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({'test': 'test'})
+
+@app.route('/test', methods=['POST'])
+def test():
+    return jsonify({'test': 'works you fool'})
