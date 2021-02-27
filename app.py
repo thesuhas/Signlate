@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request, Response
-import cv2
 import numpy as np
 from PIL import Image
 
@@ -16,6 +15,7 @@ def test():
 @app.route('/upload', methods=['POST'])
 def fail():
     file_img = request.files['file']
+    print(file_img)
     img = request.files['file'].read()
     img = Image.open(io.BytesIO(img))
     # Converting image to np array
