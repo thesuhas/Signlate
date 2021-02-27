@@ -1,1 +1,1 @@
-worker: python landingscreen.py
+worker: python app.py
