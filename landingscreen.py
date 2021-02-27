@@ -1,6 +1,7 @@
 import kivy
 import cv2
 from kivy.clock import Clock
+from kivy.network.urlrequest import UrlRequest
 from kivy.graphics.texture import Texture
 from kivy.uix.image import Image
 import time
@@ -25,20 +26,15 @@ class Test(BoxLayout):
 		# Inside
 		self.inside = FloatLayout(size_hint=(1, 0.1))
 		self.inside.cols = 2
-		self.capture = cv2.VideoCapture(0)
-		#self.play = Button(text="Play", size_hint=(0.5, 1), pos_hint={"left": 1})
-		#self.play.bind(on_press=self.pressed)
+		self.capture = cv2.VideoCapture(0) # Video Capture
 		self.translate = Button(text="Translate", size_hint=(1, 1))
-		self.translate.bind(on_press=self.pressed)
-		#self.inside.add_widget(self.play)
+		self.translate.bind(on_press=self.pressed) # Binding Function to Button Press
 		self.inside.add_widget(self.translate)
 		self.add_widget(self.inside)
-		#cv2.namedWindow("CV2 Image")
-		Clock.schedule_interval(self.update, 1.0/33.0)
+		Clock.schedule_interval(self.update, 1.0/33.0) # Interval to update video stream at
 
 	def update(self, dt):
 		ret, frame = self.capture.read()
-		#cv2.imshow("CV2 Image", frame)
 		buf1 = cv2.flip(frame, 0)
 		buf = buf1.tostring()
 		texture1 = Texture.create(size = (frame.shape[1], frame.shape[0]), colorfmt='bgr')
@@ -46,7 +42,18 @@ class Test(BoxLayout):
 		self.img1.texture = texture1
 
 	def pressed(self, instance):
-		print("Pressed")
+		# URL to send request to
+		url = "https://signlate.herokuapp.com/"
+		# Request being sent
+		req = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail)
+
+	# Function that is called on success
+	def print_res(self, req, res):
+		print(res)
+
+	# Function that is called on failure
+	def print_fail(self, req, res):
+		print("Request Failed")
 
 
 class CamApp(App):
