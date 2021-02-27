@@ -1,4 +1,7 @@
 from flask import Flask, jsonify, request, Response
+import cv2
+import numpy as np
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -10,7 +13,12 @@ def nothing():
 def test():
     return jsonify({'test': 'test'})
 
-'''@app.route('/test', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def fail():
-    data = request.files['data']
-    print(data)'''
+    file_img = request.files['file']
+    img = request.files['file'].read()
+    img = Image.open(io.BytesIO(img))
+    # Converting image to np array
+    img2 = np.array(img)
+
+    return jsonify({"test": "received"})
