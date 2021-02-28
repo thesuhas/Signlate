@@ -8,4 +8,4 @@ An App that converts video format to Sign Language. The application itself is ma
 ## Basic Layout
 
 The basic layout is as follows:<br>
-![Basic App Layout](https://github.com/thesuhas/Signlate/images/app.png)
+![Basic App Layout](https://github.com/thesuhas/Signlate/blob/main/images/app.png)
