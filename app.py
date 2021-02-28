@@ -8,10 +8,12 @@ app = Flask(__name__)
 def nothing():
     return jsonify({"message": "This app translates sign language"})
 
+#GET methods (functioning properly)
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({'test': 'test'})
 
+#POST methods (Not being accepted)
 @app.route('/upload', methods=['POST'])
 def fail():
     file_img = request.files['file']

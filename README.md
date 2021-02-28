@@ -1,5 +1,5 @@
 # Signlate
-
+Code is in "main.py", the remaining .py files were made to test out features and and add some funcionalities step-by-step.
 
 ## About
 
@@ -10,4 +10,4 @@ An App that converts Sign Language in video format to text. The application itse
 The basic layout is as follows:<br><br>
 ![Basic App Layout](https://github.com/thesuhas/Signlate/blob/main/images/app.png)
 <br><br>
-The translation appears in the text box that says "Translation Comes here"
+The translation appears in a text box below the image.
