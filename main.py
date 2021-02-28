@@ -14,6 +14,16 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
+import tensorflow as tf
+
+
+# Loading model
+model = tf.keras.models.load_model("C:/Users/suhas/Documents/College Projects/Signlate/model")
+model.make_predict_function()
+
+def predict(img, model):
+	pred = model.predict(img)
+
 
 class Test(BoxLayout):
 	def __init__(self, **kwargs):
