@@ -52,10 +52,11 @@ class Test(BoxLayout):
 		# texture1 = texture1.fliphorizontal()
 		self.img1.texture = texture1
 
+	# clears the label for every new word
 	def nxtword(self, instance):
 		self.output.text = ""			
 
-
+	# changes label to show translation
 	def updatelabel(self, alphabet):
 		if self.output.text == "Translation comes here":
 			self.output.text = ""			
