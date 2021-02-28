@@ -50,10 +50,12 @@ class Test(BoxLayout):
 	def update(self, dt):
 		ret, frame = self.capture.read()
 		buf1 = cv2.flip(frame, 0)
-		buf = buf1.tostring()
+		buf2 = cv2.flip(buf1, 1)
+		buf = buf2.tostring()
 		self.img = frame
 		texture1 = Texture.create(size = (frame.shape[1], frame.shape[0]), colorfmt='bgr')
 		texture1.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
+		# texture1 = texture1.fliphorizontal()
 		self.img1.texture = texture1
 
 	def nxtword(self, instance):
