@@ -3,7 +3,7 @@
 
 ## About
 
-An App that converts Sign Language in video format to text. The application itself is made by using kivy (a python library for app development). A user can click a picture from the app, which is then fed to a CNN. This CNN then returns the sign to the App to be displayed.
+An App that converts Sign Language in video format to text. The application itself is made using kivy (a python framework for app development). A user can access camera to submit their video on the app, from which frames are captured at regular time intervals and fed to a Convolutional Neural Network (CNN). This CNN then returns the letter corresponding to the sign to the App to be displayed to the user.
 
 ## Basic Layout
 
