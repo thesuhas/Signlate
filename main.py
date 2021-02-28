@@ -1,9 +1,3 @@
-# Questtions I have:
-# Where to put headers?
-# how to send image
-# i am sorry idk how to
-# how to recieve image
-
 import kivy
 import cv2
 from kivy.app import App
