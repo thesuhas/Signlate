@@ -13,6 +13,7 @@ from kivy.graphics.texture import Texture
 from kivy.uix.image import Image
 import time
 import base64
+import requests
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -51,11 +52,20 @@ class Test(BoxLayout):
 	def pressed(self, instance):
 		# URL to send request to
 		url = "http://127.0.0.1:5000/upload"
-		headers = {'Content-Type': "multipart/form-data"}
+		content_type = 'image/jpeg'
+		headers = {'content-type': content_type}
 		# Request being sent
 		#print(self.img)
-		res = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail, method='POST', req_body=self.img.tostring(), req_headers=headers)
+		self.output.text = "test"
+		cv2.imwrite("test.jpg", self.img)
+		img = cv2.imread("test.jpg")
+		print(img)
+		#_, img_encoded = cv2.imencode('.jpg', img)
+		#res = requests.post(url, data=img_encoded.tostring(), headers=headers)
+		#res = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail, method='POST', req_body=self.img.tostring(), req_headers=headers)
 		#print(res)
+
+
 
 	# Function that is called on success
 	def print_res(self, req, res):
@@ -66,11 +76,11 @@ class Test(BoxLayout):
 		print("Request Failed", req, res)
 
 
-class CamApp(App):
+class TestApp(App):
 
 	def build(self):
 		return Test()
 
 if __name__ == '__main__':
-    CamApp().run()
+    TestApp().run()
     cv2.destroyAllWindows()
