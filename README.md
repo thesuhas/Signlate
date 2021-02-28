@@ -1,5 +1,5 @@
 # Signlate
-Code is in "main.py", rest .py files were made to test out features and and add some funcionalities step-by-step.
+Code is in "main.py", the remaining .py files were made to test out features and and add some funcionalities step-by-step.
 
 ## About
 
