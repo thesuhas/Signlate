@@ -34,9 +34,16 @@ class Test(BoxLayout):
 		self.inside = FloatLayout(size_hint=(1, 0.1))
 		self.inside.cols = 2
 		self.capture = cv2.VideoCapture(0) # Video Capture
-		self.translate = Button(text="Translate", size_hint=(1, 1))
+		
+		self.translate = Button(text="Translate", size_hint=(0.5, 0.75), pos_hint={"right": 1})
 		self.translate.bind(on_press=self.pressed) # Binding Function to Button Press
+
+		self.nextword = Button(text="Next Word", size_hint=(0.5, 0.75), pos_hint={"left": 1})
+		self.nextword.bind(on_press=self.nxtword)
+
 		self.inside.add_widget(self.translate)
+		self.inside.add_widget(self.nextword)
+
 		self.add_widget(self.inside)
 		Clock.schedule_interval(self.update, 1.0/33.0) # Interval to update video stream at
 
@@ -49,14 +56,24 @@ class Test(BoxLayout):
 		texture1.blit_buffer(buf, colorfmt="bgr", bufferfmt="ubyte")
 		self.img1.texture = texture1
 
+	def nxtword(self, instance):
+		self.output.text = ""			
+
+
+	def updatelabel(self, alphabet):
+		if self.output.text == "Translation comes here":
+			self.output.text = ""			
+
+		self.output.text = self.output.text +" "+ alphabet
+
 	def pressed(self, instance):
 		# URL to send request to
-		url = "http://127.0.0.1:5000/upload"
+		url = "https://signlate.herokuapp.com/test"
 		content_type = 'image/jpeg'
 		headers = {'content-type': content_type}
+		
 		# Request being sent
 		#print(self.img)
-		self.output.text = "test"
 		cv2.imwrite("test.jpg", self.img)
 		img = cv2.imread("test.jpg")
 		print(img)
@@ -65,6 +82,9 @@ class Test(BoxLayout):
 		#res = UrlRequest(url=url, on_success=self.print_res, on_failure=self.print_fail, method='POST', req_body=self.img.tostring(), req_headers=headers)
 		#print(res)
 
+		#returns the translation
+		for letter in ['a', 'b', 'c', 'd']:
+			self.updatelabel(letter)
 
 
 	# Function that is called on success
