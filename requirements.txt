@@ -9,3 +9,10 @@ matplotlib==3.2.2
 matplotlib-venn==0.11.6
 six==1.15.0
 temp==2020.7.2
+Kivy==2.0.0
+kivy-deps.angle==0.3.0
+kivy-deps.glew==0.3.0
+kivy-deps.gstreamer==0.3.1
+kivy-deps.sdl2==0.3.1
+Kivy-examples==2.0.0
+Kivy-Garden==0.1.4
